@@ -26,4 +26,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: yourdockerhubusername/my-node-app:latest
+        tags: techdocker24/my-node-app:latest
