@@ -1,20 +1,20 @@
-#use node js image 
+# Use node js image 
 FROM node:18
 
-#Set Working directory 
+# Set working directory
 WORKDIR /app
 
-#Copy package.json 
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-#Install dependencies
+# Install dependencies
 RUN npm install
 
-#copy rest of the app
+# Copy app files
 COPY . .
 
-#expose port
+# Expose port
 EXPOSE 3000
 
-#START THE APP
+# Start the app
 CMD ["node", "index.js"]
