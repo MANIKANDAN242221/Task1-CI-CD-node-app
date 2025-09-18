@@ -1,30 +1,23 @@
-# Stage 1: Build the React app
-FROM node:18 AS builder
+# Using Node.js 16 as the base image
+FROM node:16
 
+# Setting up the working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package.json ./
-COPY package-lock.json ./
+# Copying the package.json and package-lock.json files to the working directory
+COPY package*.json ./
+
+# Installation of npm dependency
 RUN npm install
 
-# Copy the source code and build
+# Copy the application code
 COPY . .
+
+# Buildinf of the React app
 RUN npm run build
 
-# Stage 2: Serve the app using a static server
-FROM node:18-slim
-
-# Install a simple static file server
-RUN npm install -g serve
-
-WORKDIR /app
-
-# Copy built app from builder stage
-COPY --from=builder /app/build ./build
-
-# Expose the port the app runs on
+# Expose port 3000 to access app
 EXPOSE 3000
 
-# Run the app using serve
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Start your Node.js server
+CMD ["npm", "start"]
